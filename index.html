@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totally Accurate Weather</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: rgb(0, 0, 0);
+            transition: all 0.5s ease;
+        }
+        #container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            transition: all 0.5s ease;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background: #ff5f6d;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff9966;
+        }
+        #loading {
+            display: none;
+            padding: 20px;
+            font-size: 18px;
+        }
+        .fool-mode {
+            background: radial-gradient(circle, yellow, orange, red);
+            color: black;
+            font-family: 'Comic Sans MS', cursive;
+            transform: rotate(5deg);
+            animation: shake 0.5s infinite alternate, flash 1s infinite alternate;
+        }
+        @keyframes shake {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+        @keyframes flash {
+            0% { background: yellow; }
+            100% { background: pink; }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>First, Enter Your Name</h1>
+        <input type="text" id="name" placeholder="Enter your name">
+        <button onclick="getName()">Enter</button>
+        <br>
+        <h1>Check Your Location's Weather</h1>
+        <input type="text" id="location" placeholder="Enter your location">
+        <button onclick="fetchWeather()">Check Weather</button>
+        <div id="loading">Loading... ⏳</div>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        let userName = "";
+        
+        function getName(){
+            userName = document.getElementById("name").value;
+            alert("Thank you, " + userName + "!");
+        }
+        
+        function fetchWeather() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').innerText = '';
+            document.body.classList.remove('fool-mode');
+            document.getElementById('container').style.transform = 'scale(1)';
+            
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result').innerText = "Go outside and check the weather yourself, moda " + (userName || "gobba user") + "! 🌦️";
+                document.body.classList.add('fool-mode');
+                document.getElementById('container').style.transform = 'scale(1.2)';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
